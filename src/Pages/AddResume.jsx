@@ -16,12 +16,14 @@ import { Input } from "@/components/ui/input";
 import { v4 as uuidv4 } from "uuid";
 import GlobalApi from "../../Service/GlobalApi";
 import { useUser } from "@clerk/clerk-react";
+import { useNavigate } from "react-router-dom";
 
 const AddResume = () => {
   const [toggleDialog, setToggleDialog] = useState(false);
   const [resumeTitle, setresumeTitle] = useState("");
   const { user } = useUser();
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate()
 
   const onCreate = async () => {
     setLoading(true);
@@ -36,10 +38,10 @@ const AddResume = () => {
     };
 
     try {
-      const response = await GlobalApi.CreateNewResume(data);
-      console.log("Resume created successfully:", response.data);
+      const response = await GlobalApi.CreateNewResume(data);   
       setLoading(false);
-      // setToggleDialog(false); // Close dialog after success
+      navigate(`/dashboard/resume/${response.data.data.documentId}/edit`)
+      setToggleDialog(false); // Close dialog after success
     } catch (error) {
       console.error("Error creating resume:", error.response?.data || error.message);
       setLoading(false);
