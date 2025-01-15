@@ -20,7 +20,7 @@ export default {
       link: "https://twitter.com/johndoe",
     },
   ],
-  themeColor: `#4CAF50`,
+  themeColor: `#5B913B`,
   summary:
     "A passionate software engineer with over 5 years of experience in web and mobile app development. A passionate software engineer with over 5 years of experience in web and mobile app development. A passionate software engineer with over 5 years of experience in web and mobile app development.",
   experience: [

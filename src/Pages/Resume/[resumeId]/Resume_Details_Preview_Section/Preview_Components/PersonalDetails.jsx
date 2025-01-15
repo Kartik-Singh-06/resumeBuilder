@@ -10,18 +10,18 @@ const PersonalDetails = ({ resumeInfo }) => {
       <h2 className="text-center text-base font-medium ">
         {resumeInfo?.jobTitle}
       </h2>
-      <p className="text-center text-sm w-2/3 mx-auto text-zinc-600 ">
+      <p className="text-center text-sm w-2/3 mx-auto text-zinc-700 ">
         {resumeInfo?.address}
       </p>
-      <p className="text-center text-xs text-zinc-600 mb-2">
+      <p className="text-center text-xs text-zinc-700 mb-2">
         {resumeInfo?.dateOfBirth}
       </p>
       <div className="flex justify-between border-b-[5px] pb-2 "style={{
    borderColor : resumeInfo?.themeColor,
    color : resumeInfo?.themeColor
       }}>
-      <p className="text-center text-xs text-zinc-600" >{resumeInfo?.phoneNumber}</p>
-      <p className="text-center text-xs text-zinc-600">{resumeInfo?.email}</p>
+      <p className="text-center text-xs text-zinc-700" >{resumeInfo?.phoneNumber}</p>
+      <p className="text-center text-xs text-zinc-700">{resumeInfo?.email}</p>
       </div>
       
 
