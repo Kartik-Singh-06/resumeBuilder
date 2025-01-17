@@ -3,7 +3,7 @@ export default {
   lastName: "Singh",
   jobTitle: "Software Engineer",
   address: "New vishnupuri extension near water tank Aligarh uttar Pradesh - 202001",
-  phoneNumber: "+91 8791303302",
+  phoneNumber: "8791303302",
   email: "tkartik0661@example.com",
   dateOfBirth: "12-06-1998",
   socialLinks: [
