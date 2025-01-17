@@ -6,13 +6,19 @@ import GlobalApi from "../../../../../../Service/GlobalApi";
 import { LoaderCircle } from "lucide-react";
 import { toast } from "sonner";
 import { useParams } from "react-router-dom";
+import { chatSession } from "../../../../../../Service/AIModel";
+
 const IntroductionForm = ({ enableButton }) => {
   const param = useParams();
   const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
   const [intro, setIntro] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  console.log(param)
+  const [genrateAItext, setGenerateAItext] = useState([]);
+
+
+  const prompt =
+    "Job Title: {jobTitle}, Depends on job title give me a introduction for my resume with in 4-5 lines in JSON format with feild experience level and summary with experience level for fresher-Level, Mid-level, Experience-level. please give me a array.";
   useEffect(() => {
     const timer = setTimeout(() => {
       intro &&
@@ -38,12 +44,13 @@ const IntroductionForm = ({ enableButton }) => {
     enableButton(true);
     setLoading(true);
     const data = {
-       data:{
-        summary : intro
-       }
-    }
-    GlobalApi.updateResumeDetails(param?.resumeId, data).then((res) => {
-        console.log(res);
+      data: {
+        summary: intro,
+      },
+    };
+    GlobalApi.updateResumeDetails(param?.resumeId, data)
+      .then((res) => {
+      
         enableButton(true);
         setLoading(false);
         toast("Details updated");
@@ -52,6 +59,35 @@ const IntroductionForm = ({ enableButton }) => {
         setLoading(false);
         console.log(err);
       });
+  };
+
+  const generateAIIntro = async () => {
+    try {
+      setLoading(true);
+      const PROMPT = prompt.replace("{jobTitle}", resumeInfo?.jobTitle);
+      
+
+      const mockResponse = [
+        {
+          experienceLevel: "Fresher-Level",
+          summary: "This is a fresher summary.",
+        },
+        {
+          experienceLevel: "Mid-Level",
+          summary: "This is a mid-level summary.",
+        },
+      ];
+
+      const result = await chatSession.sendMessage(PROMPT);
+      const responseText = await result.response.text();
+
+      const parsedResponse = JSON.parse(responseText);
+      setGenerateAItext(parsedResponse);
+    } catch (error) {
+      console.error("Error generating AI introduction:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -64,11 +100,19 @@ const IntroductionForm = ({ enableButton }) => {
           <label className="font-semibold text-zinc-700">
             Add Introduction
           </label>
-          <Button className="bg-transparent outline-1 shadow-md text-[#007AFF] hover:bg-white">
+          <Button
+            type="button"
+            onClick={() => generateAIIntro()}
+            className="bg-transparent outline-1 shadow-md text-[#007AFF] hover:bg-white"
+          >
             Generate from AI
           </Button>
         </div>
-        <Textarea className="mt-5 h-[20vh]" required onChange={handleInputChange} />
+        <Textarea
+          className="mt-5 h-[20vh]"
+          required
+          onChange={handleInputChange}
+        />
         {error && <p className="text-red-500 mt-2">{error}</p>}
         <div className="mt-4 flex justify-end">
           <Button
@@ -80,6 +124,18 @@ const IntroductionForm = ({ enableButton }) => {
           </Button>
         </div>
       </form>
+      {genrateAItext && (
+      <div className="mt-10">
+        <h2 className="text-xl font-bold">AI Suggestions for Introduction:</h2>
+        {genrateAItext.map((item, index) => (
+          <div key={index} className="p-4 border-b">
+            <h3 className="font-bold text-lg">Level: {item?.experienceLevel}</h3>
+            <p>{item?.introduction[0]}</p>
+            <p>{item?.summary}</p>
+          </div>
+        ))}
+      </div>
+    )}
     </div>
   );
 };
