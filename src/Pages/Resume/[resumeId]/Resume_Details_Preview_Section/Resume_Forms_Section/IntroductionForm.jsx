@@ -16,7 +16,6 @@ const IntroductionForm = ({ enableButton }) => {
   const [loading, setLoading] = useState(false);
   const [genrateAItext, setGenerateAItext] = useState([]);
 
-
   const prompt =
     "Job Title: {jobTitle}, Depends on job title give me a introduction for my resume with in 4-5 lines in JSON format with feild experience level and summary with experience level for fresher-Level, Mid-level, Experience-level. please give me a array.";
   useEffect(() => {
@@ -50,7 +49,6 @@ const IntroductionForm = ({ enableButton }) => {
     };
     GlobalApi.updateResumeDetails(param?.resumeId, data)
       .then((res) => {
-      
         enableButton(true);
         setLoading(false);
         toast("Details updated");
@@ -65,22 +63,8 @@ const IntroductionForm = ({ enableButton }) => {
     try {
       setLoading(true);
       const PROMPT = prompt.replace("{jobTitle}", resumeInfo?.jobTitle);
-      
-
-      const mockResponse = [
-        {
-          experienceLevel: "Fresher-Level",
-          summary: "This is a fresher summary.",
-        },
-        {
-          experienceLevel: "Mid-Level",
-          summary: "This is a mid-level summary.",
-        },
-      ];
-
       const result = await chatSession.sendMessage(PROMPT);
       const responseText = await result.response.text();
-
       const parsedResponse = JSON.parse(responseText);
       setGenerateAItext(parsedResponse);
     } catch (error) {
@@ -124,18 +108,22 @@ const IntroductionForm = ({ enableButton }) => {
           </Button>
         </div>
       </form>
-      {genrateAItext && (
-      <div className="mt-10">
-        <h2 className="text-xl font-bold">AI Suggestions for Introduction:</h2>
-        {genrateAItext.map((item, index) => (
-          <div key={index} className="p-4 border-b">
-            <h3 className="font-bold text-lg">Level: {item?.experienceLevel}</h3>
-            <p>{item?.introduction[0]}</p>
-            <p>{item?.summary}</p>
-          </div>
-        ))}
-      </div>
-    )}
+      {genrateAItext.length > 0 && (
+        <div className="mt-10">
+          <h2 className="text-xl font-bold">
+            AI Suggestions for Introduction:
+          </h2>
+          {genrateAItext.map((item, index) => (
+            <div key={index} className="p-4 border-b">
+              <h3 className="font-bold text-lg">
+                Level: {item?.experienceLevel}
+              </h3>
+              <p>{item?.introduction[0]}</p>
+              <p>{item?.summary}</p>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
