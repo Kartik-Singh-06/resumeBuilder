@@ -17,7 +17,7 @@ const EducationDetails = ({ resumeInfo }) => {
         }}
       />
 
-      {resumeInfo?.education.map((exp, index) => (
+      {resumeInfo?.education?.map((exp, index) => (
         <div key={index} className="mt-2">
           <div className="flex justify-between text-sm">
             <h5 className="font-semibold">{exp?.degree}</h5>

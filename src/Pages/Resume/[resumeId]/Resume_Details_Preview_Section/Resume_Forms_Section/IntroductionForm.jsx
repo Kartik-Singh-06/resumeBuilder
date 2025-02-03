@@ -84,13 +84,6 @@ const IntroductionForm = ({ enableButton }) => {
           <label className="font-semibold text-zinc-700">
             Add Introduction
           </label>
-          <Button
-            type="button"
-            onClick={() => generateAIIntro()}
-            className="bg-transparent outline-1 shadow-md text-[#007AFF] hover:bg-white"
-          >
-            Generate from AI
-          </Button>
         </div>
         <Textarea
           className="mt-5 h-[20vh]"

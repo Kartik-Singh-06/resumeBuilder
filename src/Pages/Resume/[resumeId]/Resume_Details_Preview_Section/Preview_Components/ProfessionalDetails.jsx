@@ -1,7 +1,6 @@
 import React from "react";
 
 const ProfessionalDetails = ({ resumeInfo }) => {
-  console.log(resumeInfo);
 
   return (
     <div className="my-6">
@@ -28,11 +27,13 @@ const ProfessionalDetails = ({ resumeInfo }) => {
             </h5>
           </div>
           <h5 className="font-semibold text-zinc-500">{exp?.role} - <span className="text-xs font-medium">{exp?.city}</span></h5>
-          <ul className="text-sm">
+          <div className='text-xs my-2' dangerouslySetInnerHTML={{__html:exp?.workSummery}} />
+          
+          {/* <ul className="text-sm">
             {exp?.responsibilities?.map((responsibility, index) => (
               <li key={index} className="list-disc ml-5">{responsibility}</li>
             ))}
-          </ul>
+          </ul> */}
         </div>
       ))}
     </div>

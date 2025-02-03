@@ -38,7 +38,6 @@ const PersonalDetailsForm = ({ enableButton }) => {
     };
     GlobalApi.updateResumeDetails(param?.resumeId, data)
       .then((res) => {
-        console.log(res);
         enableButton(true);
         setLoading(false);
         toast("Details updated")

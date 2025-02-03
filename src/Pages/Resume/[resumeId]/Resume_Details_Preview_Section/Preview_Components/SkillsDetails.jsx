@@ -17,7 +17,7 @@ const SkillsDetails = ({ resumeInfo }) => {
         }}
       />
       <div className="grid grid-cols-3 mt-1">
-        {resumeInfo?.skills.map((skill) => (
+        {resumeInfo?.skills?.map((skill) => (
           <div key={skill?.id} className="pt-2">
             <h2 className=" font-semibold text-xs text-zinc-700">
               {skill?.name}

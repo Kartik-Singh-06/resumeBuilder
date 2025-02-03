@@ -4,7 +4,9 @@ import { Button } from "@/Components/ui/button";
 import { ArrowLeft, ArrowRight, SwatchBook } from "lucide-react";
 import IntroductionForm from "./Resume_Forms_Section/IntroductionForm";
 import ExperienceForm from "./Resume_Forms_Section/ExperienceForm";
-import ExperienceForm1 from "./Resume_Forms_Section/ExperienceForm1";
+import EducationForm from "./Resume_Forms_Section/EducationForm";
+import Experience from "./Resume_Forms_Section/ExperienceForm";
+
 
 const ResumeForm = () => {
   const [activeFormPage, setActiveFormPage] = useState(1); //for tracking form-pages
@@ -40,11 +42,11 @@ const ResumeForm = () => {
       ) : activeFormPage === 2 ? (
         <IntroductionForm enableButton={(val) => setEnableButton(val)} />
       ) : activeFormPage === 3 ? (
-        <ExperienceForm enableButton={(val) => setEnableButton(val)} />
-      ) : null}
+        <Experience enableButton={(val) => setEnableButton(val)} />
+      ) : activeFormPage === 4 ? <EducationForm enableButton={(val) => setEnableButton(val)} /> : null}
 
 
-      {/* educational details */}
+      
 
       {/*skills  */}
     </div>
