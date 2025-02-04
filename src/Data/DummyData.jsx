@@ -45,27 +45,26 @@ export default {
   ],
   skills: [
     {
-    id: 1,
+    
     name : "JavaScript",
     rate : 100 
   },
     {
-    id: 2,
+    
     name : "React",
     rate : 90
   },
     {
-    id: 3,
+    
     name : "NodeJS",
     rate : 90
   },
     {
-    id: 4,
+    
     name : "Vue",
     rate : 70
   },
     {
-    id: 5,
     name : "Azure Cloud",
     rate : 75 
   },

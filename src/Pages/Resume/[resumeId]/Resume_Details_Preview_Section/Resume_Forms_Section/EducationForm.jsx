@@ -39,7 +39,7 @@ const EducationForm = () => {
   }, [educationList]);
 
   const handleSubmit = () => {
-
+  setLoading(true);
    const data = {
     data : {
         education : educationList

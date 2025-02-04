@@ -50,7 +50,7 @@ const Experience = () => {
 
   const handleSubmit = () => {
     setLoading(true);
-    console.log("resumeId:", params?.resumeId);
+    
     if (!params?.resumeId) {
       console.error("resumeId is undefined");
       setLoading(false);
@@ -58,13 +58,13 @@ const Experience = () => {
       return;
     }
     const data = {
-      data: {  // ← Nested under "data"
+      data: {  
         experience: experienceList.map(item => ({
           role: item.role,
           company: item.company,
           city: item.city,
           duration: item.duration,
-          workSummary: item.workSummery // Fix typo here
+          workSummary: item.workSummery 
         }))
       }
     };

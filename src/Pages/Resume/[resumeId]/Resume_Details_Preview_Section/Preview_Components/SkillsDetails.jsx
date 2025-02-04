@@ -17,14 +17,14 @@ const SkillsDetails = ({ resumeInfo }) => {
         }}
       />
       <div className="grid grid-cols-3 mt-1">
-        {resumeInfo?.skills?.map((skill) => (
-          <div key={skill?.id} className="pt-2">
+        {resumeInfo?.skills?.map((skill,i) => (
+          <div key={i} className="pt-2">
             <h2 className=" font-semibold text-xs text-zinc-700">
               {skill?.name}
               <div className="w-[120px] h-2 bg-zinc-200">
                 <div className="h-2" style={{
                     backgroundColor : resumeInfo?.themeColor,
-                    width : skill?.rate + "%"
+                    width : skill?.rate*20 + "%"
                 }}
                 ></div>
            
