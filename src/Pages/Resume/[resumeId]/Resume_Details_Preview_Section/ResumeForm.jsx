@@ -6,7 +6,7 @@ import IntroductionForm from "./Resume_Forms_Section/IntroductionForm";
 import ExperienceForm from "./Resume_Forms_Section/ExperienceForm";
 import EducationForm from "./Resume_Forms_Section/EducationForm";
 import Experience from "./Resume_Forms_Section/ExperienceForm";
-import SkillFrom from "./Resume_Forms_Section/SkillFrom";
+import SkillForm from "./Resume_Forms_Section/SkillFrom";
 
 const ResumeForm = () => {
   const [activeFormPage, setActiveFormPage] = useState(1); //for tracking form-pages
@@ -46,7 +46,7 @@ const ResumeForm = () => {
       ) : activeFormPage === 4 ? (
         <EducationForm enableButton={(val) => setEnableButton(val)} />
       ) : activeFormPage === 5 ? (
-        <SkillFrom enableButton={(val) => setEnableButton(val)} />
+        <SkillForm enableButton={(val) => setEnableButton(val)} />
       ) : null}
     </div>
   );

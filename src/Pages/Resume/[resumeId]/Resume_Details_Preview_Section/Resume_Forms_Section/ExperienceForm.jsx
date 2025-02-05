@@ -20,7 +20,11 @@ const Experience = () => {
   const [experienceList, setExperienceList] = useState([formFields]);
   const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
   const params = useParams();
-  console.log(experienceList);
+
+  useEffect(() => {
+    resumeInfo && setExperienceList(resumeInfo?.experience);
+  }, []);
+
   const handleChange = (index, e) => {
     const newEntries = experienceList.map((entry, i) =>
       i === index ? { ...entry, [e.target.name]: e.target.value } : entry
@@ -50,7 +54,7 @@ const Experience = () => {
 
   const handleSubmit = () => {
     setLoading(true);
-    
+
     if (!params?.resumeId) {
       console.error("resumeId is undefined");
       setLoading(false);
@@ -58,15 +62,15 @@ const Experience = () => {
       return;
     }
     const data = {
-      data: {  
-        experience: experienceList.map(item => ({
+      data: {
+        experience: experienceList.map((item) => ({
           role: item.role,
           company: item.company,
           city: item.city,
           duration: item.duration,
-          workSummary: item.workSummery 
-        }))
-      }
+          workSummery: item.workSummery,
+        })),
+      },
     };
 
     GlobalApi.updateResumeDetails(params?.resumeId, data)
@@ -96,6 +100,7 @@ const Experience = () => {
                 <Input
                   name="role"
                   placeholder="eg: Cloud Engg."
+                  defaultValue={item.role}
                   onChange={(e) => handleChange(index, e)}
                 />
               </div>
@@ -104,6 +109,7 @@ const Experience = () => {
                 <Input
                   name="company"
                   placeholder="eg: XYZ solutions"
+                  defaultValue={item.company}
                   onChange={(e) => handleChange(index, e)}
                 />
               </div>
@@ -112,6 +118,7 @@ const Experience = () => {
                 <Input
                   name="city"
                   placeholder="eg: New York"
+                  defaultValue={item.city}
                   onChange={(e) => handleChange(index, e)}
                 />
               </div>
@@ -121,6 +128,7 @@ const Experience = () => {
                   type="text"
                   placeholder="eg: 2012-present"
                   name="duration"
+                  defaultValue={item.duration}
                   onChange={(e) => handleChange(index, e)}
                 />
               </div>
@@ -128,6 +136,7 @@ const Experience = () => {
             <div className="mb-5 h-[25vh]">
               <RichTextEditor
                 index={index}
+                defaultValue={item?.workSummery}
                 onTextEditorChange={(e) =>
                   onTextEditorChange(e, "workSummery", index)
                 }

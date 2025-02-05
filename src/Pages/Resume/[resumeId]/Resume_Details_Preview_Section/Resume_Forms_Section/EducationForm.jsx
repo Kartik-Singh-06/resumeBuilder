@@ -14,16 +14,21 @@ const educationFields = {
   graduationYear: "",
 };
 const EducationForm = () => {
-    const params = useParams()
+  const params = useParams();
   const [loading, setLoading] = useState(false);
   const [educationList, setEducationList] = useState([educationFields]);
   const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
   const handleChange = (e, index) => {
-    const newEntries=educationList.slice();
-    const {name,value}=e.target;
-    newEntries[index][name]=value;
+    const newEntries = educationList.slice();
+    const { name, value } = e.target;
+    newEntries[index][name] = value;
     setEducationList(newEntries);
   };
+
+ useEffect(()=>{
+  resumeInfo&& setEducationList(resumeInfo?.education );
+ },[])
+
 
   const addEducationFields = () => {
     setEducationList([...educationList, { ...educationFields }]);
@@ -32,26 +37,26 @@ const EducationForm = () => {
     setEducationList((prev) => prev.slice(0, -1));
   };
   useEffect(() => {
-    setResumeInfo((prev) => ({
-      ...prev,
+    setResumeInfo({
+      ...resumeInfo,
       education: educationList,
-    }));
+    });
   }, [educationList]);
 
   const handleSubmit = () => {
-  setLoading(true);
-   const data = {
-    data : {
-        education : educationList
-    }
-   }
-   GlobalApi.updateResumeDetails(params?.resumeId, data)
+    setLoading(true);
+    const data = {
+      data: {
+        education: educationList.map(({id,...rest})=> rest),
+      },
+    };
+    GlobalApi.updateResumeDetails(params?.resumeId, data)
       .then((res) => {
         console.log("API Response:", res);
         setLoading(false);
         toast("Details updated!");
       })
-    .catch((error) => {
+      .catch((error) => {
         console.error("API Error:", error.response?.data || error.message);
         setLoading(false);
         toast("Failed to update details. Please try again.");
@@ -76,6 +81,7 @@ const EducationForm = () => {
                   <Input
                     type="text"
                     name="degree"
+                    defaultValue={item?.degree}
                     placeholder="eg: Bachelor in Computer Science"
                     onChange={(e) => handleChange(e, index)}
                   />
@@ -85,6 +91,7 @@ const EducationForm = () => {
                   <Input
                     type="text"
                     name="institution"
+                    defaultValue={item?.institution}
                     placeholder="eg: Boston University"
                     onChange={(e) => handleChange(e, index)}
                   />
@@ -94,6 +101,7 @@ const EducationForm = () => {
                   <Input
                     type="text"
                     name="city"
+                    defaultValue={item?.city}
                     placeholder="eg: Boston"
                     onChange={(e) => handleChange(e, index)}
                   />
@@ -103,6 +111,7 @@ const EducationForm = () => {
                   <Input
                     type="text"
                     name="graduationYear"
+                    defaultValue={item?.graduationYear}
                     placeholder="eg: 2018"
                     onChange={(e) => handleChange(e, index)}
                   />

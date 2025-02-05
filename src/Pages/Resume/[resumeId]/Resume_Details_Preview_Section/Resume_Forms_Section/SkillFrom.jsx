@@ -9,11 +9,8 @@ import GlobalApi from "../../../../../../Service/GlobalApi";
 import { useParams } from "react-router-dom";
 import { toast } from "sonner";
 
-const skillfields = {
-  name: "",
-  rate: 0,
-};
-const SkillFrom = () => {
+
+const SkillForm = () => {
   const params = useParams();
   const [skillList, setSkillList] = useState([{ name: "", rate: 0 }]);
   const [loading, setLoading] = useState(false);
@@ -40,6 +37,8 @@ const SkillFrom = () => {
         skills: skillList,
       },
     };
+    console.log("Sending data:", JSON.stringify(data, null, 2)); // Debugging
+
     GlobalApi.updateResumeDetails(params?.resumeId, data)
       .then((res) => {
         console.log("API Response:", res);
@@ -130,4 +129,4 @@ const SkillFrom = () => {
   );
 };
 
-export default SkillFrom;
+export default SkillForm;

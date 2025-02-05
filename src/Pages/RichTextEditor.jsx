@@ -24,8 +24,8 @@ import {
 import { chatSession } from "../../Service/AIModel";
 import { toast } from "sonner";
 
-const RichTextEditor = ({ onTextEditorChange, index }) => {
-  const [value, setValue] = useState();
+const RichTextEditor = ({ onTextEditorChange, index,defaultValue }) => {
+  const [value, setValue] = useState(defaultValue);
   const [loading, setLoading] = useState(false);
   const PROMPT = `position title : {positionTitle}, Depends on position title give me 5-7 bullet points for my experience in resume in HTML format.`;
   const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
