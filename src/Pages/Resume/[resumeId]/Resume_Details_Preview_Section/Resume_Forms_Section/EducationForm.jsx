@@ -7,17 +7,19 @@ import { useParams } from "react-router-dom";
 import GlobalApi from "../../../../../../Service/GlobalApi";
 import { toast } from "sonner";
 
-const educationFields = {
-  institution: "",
-  degree: " ",
-  city: "",
-  graduationYear: "",
-};
 const EducationForm = () => {
   const params = useParams();
   const [loading, setLoading] = useState(false);
-  const [educationList, setEducationList] = useState([educationFields]);
   const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
+
+  const [educationList, setEducationList] = useState([
+    { institution: "", degree: "", city: "", graduationYear: "" },
+  ]);
+
+  useEffect(() => {
+    resumeInfo && setEducationList(resumeInfo?.education);
+  }, []);
+
   const handleChange = (e, index) => {
     const newEntries = educationList.slice();
     const { name, value } = e.target;
@@ -25,29 +27,26 @@ const EducationForm = () => {
     setEducationList(newEntries);
   };
 
- useEffect(()=>{
-  resumeInfo&& setEducationList(resumeInfo?.education );
- },[])
-
-
   const addEducationFields = () => {
-    setEducationList([...educationList, { ...educationFields }]);
+    setEducationList([
+      ...educationList,
+      {
+        institution: "",
+        degree: " ",
+        city: "",
+        graduationYear: "",
+      },
+    ]);
   };
   const removeEducationFields = () => {
     setEducationList((prev) => prev.slice(0, -1));
   };
-  useEffect(() => {
-    setResumeInfo({
-      ...resumeInfo,
-      education: educationList,
-    });
-  }, [educationList]);
 
   const handleSubmit = () => {
     setLoading(true);
     const data = {
       data: {
-        education: educationList.map(({id,...rest})=> rest),
+        education: educationList.map(({ id, ...rest }) => rest),
       },
     };
     GlobalApi.updateResumeDetails(params?.resumeId, data)
@@ -62,6 +61,13 @@ const EducationForm = () => {
         toast("Failed to update details. Please try again.");
       });
   };
+
+  useEffect(() => {
+    setResumeInfo({
+      ...resumeInfo,
+      education: educationList,
+    });
+  }, [educationList]);
 
   return (
     <div>
@@ -110,8 +116,8 @@ const EducationForm = () => {
                   <label>Greaduate Year</label>
                   <Input
                     type="text"
-                    name="graduationYear"
                     defaultValue={item?.graduationYear}
+                    name="graduationYear"
                     placeholder="eg: 2018"
                     onChange={(e) => handleChange(e, index)}
                   />

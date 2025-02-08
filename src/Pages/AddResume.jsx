@@ -23,7 +23,7 @@ const AddResume = () => {
   const [resumeTitle, setresumeTitle] = useState("");
   const { user } = useUser();
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const onCreate = async () => {
     setLoading(true);
@@ -38,12 +38,15 @@ const AddResume = () => {
     };
 
     try {
-      const response = await GlobalApi.CreateNewResume(data);   
+      const response = await GlobalApi.CreateNewResume(data);
       setLoading(false);
-      navigate(`/dashboard/resume/${response.data.data.documentId}/edit`)
+      navigate(`/dashboard/resume/${response.data.data.documentId}/edit`);
       setToggleDialog(false); // Close dialog after success
     } catch (error) {
-      console.error("Error creating resume:", error.response?.data || error.message);
+      console.error(
+        "Error creating resume:",
+        error.response?.data || error.message
+      );
       setLoading(false);
     }
   };
@@ -51,7 +54,7 @@ const AddResume = () => {
   return (
     <div>
       <div
-        className="w-[12vw] h-[30vh] border-dashed border-2 border-[#b0afaf] rounded-md cursor-pointer flex justify-center items-center bg-[#e8e8e8] hover:scale-105 transition-all hover:shadow-lg"
+        className="w-full sm:w-[150px] md:w-[12vw] h-[150px] sm:h-[200px] md:h-[30vh] border-dashed border-2 border-[#b0afaf] rounded-md cursor-pointer flex justify-center items-center bg-[#e8e8e8] hover:scale-105 transition-all hover:shadow-lg"
         onClick={() => setToggleDialog(true)}
       >
         <PlusSquare />
@@ -73,14 +76,14 @@ const AddResume = () => {
           <AlertDialogFooter>
             <Button
               onClick={() => setToggleDialog(false)}
-              className="bg-[#007AFF] hover:bg-[#312ECB]"
+              className="w-full sm:w-auto bg-[#007AFF] hover:bg-[#312ECB]"
             >
               Cancel
             </Button>
             <Button
               disabled={!resumeTitle || loading}
               onClick={onCreate}
-              className="bg-[#007AFF] hover:bg-[#312ECB]"
+              className="w-full sm:w-auto bg-[#007AFF] hover:bg-[#312ECB]"
             >
               {loading ? <Loader2 className="animate-spin" /> : "Create"}
             </Button>

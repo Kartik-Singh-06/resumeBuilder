@@ -11,7 +11,7 @@ import { toast } from "sonner";
 
 
 const SkillForm = () => {
-  const params = useParams();
+  const {resumeId} = useParams();
   const [skillList, setSkillList] = useState([{ name: "", rate: 0 }]);
   const [loading, setLoading] = useState(false);
   const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
@@ -39,7 +39,7 @@ const SkillForm = () => {
     };
     console.log("Sending data:", JSON.stringify(data, null, 2)); // Debugging
 
-    GlobalApi.updateResumeDetails(params?.resumeId, data)
+    GlobalApi.updateResumeDetails(resumeId, data)
       .then((res) => {
         console.log("API Response:", res);
         setLoading(false);
@@ -59,6 +59,11 @@ const SkillForm = () => {
     });
   }, [skillList]);
 
+
+  useEffect(() => {
+      resumeInfo && setSkillList(resumeInfo?.skills);
+    }, []);
+
   return (
     <div>
       <div className="p-5 shadow-lg rounded-lg border-t-[#007AFF] border-t-4 mt-10">
@@ -76,6 +81,7 @@ const SkillForm = () => {
                   <label className="mb-2">Name</label>
                   <Input
                     type="text"
+                    defaultValue={item?.name}
                     placeholder="eg: JavaScript"
                     onChange={(e) =>
                       handleChange(index, "name", e.target.value)

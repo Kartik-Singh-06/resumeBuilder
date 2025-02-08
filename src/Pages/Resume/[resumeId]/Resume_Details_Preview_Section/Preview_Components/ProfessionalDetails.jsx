@@ -18,7 +18,7 @@ const ProfessionalDetails = ({ resumeInfo }) => {
         }}
       />
 
-      {resumeInfo?.experience.map((exp, index) => (
+      {resumeInfo?.experience?.map((exp, index) => (
         <div key={index} className="mt-2">
           <div className="flex justify-between">
             <h5 className="font-semibold">{exp?.company}</h5>

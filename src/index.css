@@ -6,6 +6,26 @@
     --radius: 0.5rem
   }
 }
+@media print{
+  #resumePreview{
+    display: block;
+  }
+  #text-area{
+    display: none;
+  }
+  body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    box-shadow: none;
+
+  }
+}
+@page{
+  size: auto;
+  margin: 0mm;
+}
+
 .rsw-ce ul {
   list-style: disc;
   padding-left: 2em;

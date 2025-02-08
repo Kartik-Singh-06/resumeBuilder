@@ -17,12 +17,19 @@ const formFields = {
 };
 const Experience = () => {
   const [loading, setLoading] = useState(false);
-  const [experienceList, setExperienceList] = useState([formFields]);
+  const [experienceList, setExperienceList] = useState([{...formFields}]);
   const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
   const params = useParams();
 
   useEffect(() => {
-    resumeInfo && setExperienceList(resumeInfo?.experience);
+    // resumeInfo && setExperienceList(resumeInfo?.experience);
+    const experiences = resumeInfo?.experience
+    if(Array.isArray(experiences)){
+      setExperienceList(experiences)
+    }else{
+      setExperienceList([{...formFields}])
+    }
+    
   }, []);
 
   const handleChange = (index, e) => {
@@ -33,7 +40,10 @@ const Experience = () => {
   };
 
   const AddNewExperience = () => {
-    setExperienceList([...experienceList, { ...formFields }]);
+    setExperienceList([
+      ...experienceList,
+      { role: "", company: "", city: "", duration: "", workSummery: "" },
+    ]);
   };
   const RemoveExperience = () => {
     setExperienceList((prev) => prev.slice(0, -1));
@@ -100,7 +110,7 @@ const Experience = () => {
                 <Input
                   name="role"
                   placeholder="eg: Cloud Engg."
-                  defaultValue={item.role}
+                  defaultValue={item?.role}
                   onChange={(e) => handleChange(index, e)}
                 />
               </div>
@@ -109,7 +119,7 @@ const Experience = () => {
                 <Input
                   name="company"
                   placeholder="eg: XYZ solutions"
-                  defaultValue={item.company}
+                  defaultValue={item?.company}
                   onChange={(e) => handleChange(index, e)}
                 />
               </div>
@@ -118,7 +128,7 @@ const Experience = () => {
                 <Input
                   name="city"
                   placeholder="eg: New York"
-                  defaultValue={item.city}
+                  defaultValue={item?.city}
                   onChange={(e) => handleChange(index, e)}
                 />
               </div>
@@ -128,7 +138,7 @@ const Experience = () => {
                   type="text"
                   placeholder="eg: 2012-present"
                   name="duration"
-                  defaultValue={item.duration}
+                  defaultValue={item?.duration}
                   onChange={(e) => handleChange(index, e)}
                 />
               </div>

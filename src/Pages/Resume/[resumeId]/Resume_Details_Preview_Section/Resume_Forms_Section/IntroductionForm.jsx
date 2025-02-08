@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { ResumeInfoContext } from "@/Context/ResumeInfoContext";
 import GlobalApi from "../../../../../../Service/GlobalApi";
-import { LoaderCircle } from "lucide-react";
+import { Brain, LoaderCircle } from "lucide-react";
 import { toast } from "sonner";
 import { useParams } from "react-router-dom";
 import { chatSession } from "../../../../../../Service/AIModel";
@@ -14,10 +14,15 @@ const IntroductionForm = ({ enableButton }) => {
   const [intro, setIntro] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [genrateAItext, setGenerateAItext] = useState([]);
+  const [genrateAItext, setGenerateAItext] = useState();
+
+  console.log(genrateAItext);
+  useEffect(() => {
+    resumeInfo && setIntro(resumeInfo?.summary);
+  }, []);
 
   const prompt =
-    "Job Title: {jobTitle}, Depends on job title give me a introduction for my resume with in 4-5 lines in JSON format with feild experience level and summary with experience level for fresher-Level, Mid-level, Experience-level. please give me a array.";
+    "Job Title: {jobTitle}, Depends on job title give me a introduction for my resume with in 4-5 lines in JSON format with feild experience level and summary with experience level for fresher-Level, Mid-level, Experience-level. please give me a array share in a single formate every time first level then its summary all keys in lower case";
   useEffect(() => {
     const timer = setTimeout(() => {
       intro &&
@@ -30,6 +35,7 @@ const IntroductionForm = ({ enableButton }) => {
   }, [intro]);
 
   const handleInputChange = (e) => {
+    enableButton(false);
     let value = e.target.value;
     if (value.length > 500) {
       setError("Introduction must be less than 500 characters");
@@ -64,9 +70,9 @@ const IntroductionForm = ({ enableButton }) => {
       setLoading(true);
       const PROMPT = prompt.replace("{jobTitle}", resumeInfo?.jobTitle);
       const result = await chatSession.sendMessage(PROMPT);
-      const responseText = await result.response.text();
-      const parsedResponse = JSON.parse(responseText);
-      setGenerateAItext(parsedResponse);
+
+      // console.log(JSON.parse(result.response.text()));
+      setGenerateAItext(JSON.parse(result.response.text()));
     } catch (error) {
       console.error("Error generating AI introduction:", error);
     } finally {
@@ -84,9 +90,19 @@ const IntroductionForm = ({ enableButton }) => {
           <label className="font-semibold text-zinc-700">
             Add Introduction
           </label>
+          <Button
+            variant="outline"
+            onClick={() => generateAIIntro()}
+            type="button"
+            size="sm"
+            className="border-primary text-primary flex gap-2"
+          >
+            <Brain className="h-4 w-4" /> Generate from AI
+          </Button>
         </div>
         <Textarea
           className="mt-5 h-[20vh]"
+          defaultValue={intro}
           required
           onChange={handleInputChange}
         />
@@ -101,20 +117,23 @@ const IntroductionForm = ({ enableButton }) => {
           </Button>
         </div>
       </form>
-      {genrateAItext.length > 0 && (
+      {genrateAItext !== undefined && (
         <div className="mt-10">
           <h2 className="text-xl font-bold">
             AI Suggestions for Introduction:
           </h2>
-          {genrateAItext.map((item, index) => (
-            <div key={index} className="p-4 border-b">
-              <h3 className="font-bold text-lg">
-                Level: {item?.experienceLevel}
-              </h3>
-              <p>{item?.introduction[0]}</p>
-              <p>{item?.summary}</p>
-            </div>
-          ))}
+
+          {generateAIIntro &&
+            (genrateAItext?.introduction || genrateAItext?.introductions || genrateAItext?.experience_level).map(
+              (item, index) => (
+                <div key={index} className="p-4 border-b">
+                  <h3 className="font-bold text-lg">
+                    Level: {item?.experiencelevel || item?.experience_level || item?.level}
+                  </h3>
+                  <p>{item?.introduction || item?.summary}</p>
+                </div>
+              )
+            )}
         </div>
       )}
     </div>
