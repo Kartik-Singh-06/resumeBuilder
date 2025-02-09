@@ -20,12 +20,20 @@ const EditResume = () => {
   })
  }
   return (
-    <ResumeInfoContext.Provider value={{resumeInfo,setResumeInfo}}>
-      <div className="grid grid-cols-2 md:grid-cols-2 p-10 gap-10">
-        {/* Form Section */}
-        <ResumeForm />
-        {/* Preview Section */}
-        <ResumePreview />
+    <ResumeInfoContext.Provider value={{ resumeInfo, setResumeInfo }}>
+      <div className="p-5 sm:p-10">
+        {/* Preview Sections */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-10">
+          {/* Form Section */}
+          <div className="order-2 lg:order-1">
+            <ResumeForm />
+          </div>
+
+          {/* Preview Section */}
+          <div className="order-1 lg:order-2">
+            <ResumePreview />
+          </div>
+        </div>
       </div>
     </ResumeInfoContext.Provider>
   );

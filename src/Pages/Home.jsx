@@ -21,7 +21,7 @@ const Home = () => {
             <section className="py-8 bg-white z-50 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">
               <h2 className="font-bold text-3xl">How it Works?</h2>
               <h2 className="text-md text-gray-500">
-                Give mock interview in just 3 simplar easy step
+                Give interviews in just 3 simplar easy step
               </h2>
 
               <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">

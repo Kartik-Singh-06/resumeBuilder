@@ -11,7 +11,7 @@ const ResumePreview = () => {
 
   return (
     <div
-      className={`shadow-lg p-14 border-t-[20px] }`}
+    className={`shadow-lg p-4 sm:p-8 md:p-14 border-t-[10px] sm:border-t-[15px] md:border-t-[20px]`}
       style={{
         borderColor: resumeInfo?.themeColor,
       }}

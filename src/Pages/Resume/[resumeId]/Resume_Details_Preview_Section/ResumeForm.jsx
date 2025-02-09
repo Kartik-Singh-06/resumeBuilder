@@ -14,51 +14,54 @@ import Theme from "../../Theme/Theme";
 const ResumeForm = () => {
   const [activeFormPage, setActiveFormPage] = useState(1); //for tracking form-pages
   const [enableButton, setEnableButton] = useState(false);
-  const {resumeId} = useParams()
+  const { resumeId } = useParams();
   return (
-    <div>
-      <div className="flex justify-between">
-        <div className="flex gap-3">
+    <div className="p-4 sm:p-6">
+      <div className="flex justify-between items-center mb-6">
+        <div className="flex gap-2 sm:gap-3">
           <Link to={"/dashboard"}>
-            <Button className="bg-[#007AFF] hover:bg-[#312ECB]">
-              <HomeIcon />
+            <Button className="bg-[#007AFF] hover:bg-[#312ECB] p-2 sm:p-3">
+              <HomeIcon className="w-4 h-4 sm:w-5 sm:h-5" />
             </Button>
           </Link>
-          <Theme/>
+          <Theme />
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-2 sm:gap-3">
           {/* page is greater then 1 then it will show back button */}
           {activeFormPage > 1 && (
             <Button
-              className="flex gap-2 bg-[#007AFF] hover:bg-[#312ECB]"
+              className="flex gap-2 bg-[#007AFF] hover:bg-[#312ECB] p-2 sm:p-3"
               onClick={() => setActiveFormPage(activeFormPage - 1)}
             >
-              <ArrowLeft />
+              <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
             </Button>
           )}
           <Button
             disabled={!enableButton}
-            className="flex gap-2 bg-[#007AFF] hover:bg-[#312ECB]"
+            className="flex gap-2 bg-[#007AFF] hover:bg-[#312ECB] p-2 sm:p-3"
             onClick={() => setActiveFormPage(activeFormPage + 1)}
           >
-            Next <ArrowRight />
+            <span className="hidden sm:inline">Next</span>
+            <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
           </Button>
         </div>
       </div>
       {/* personal details  Active page 1 then it will show 1 personal detail form.*/}
-      {activeFormPage == 1 ? (
-        <PersonalDetailsForm enableButton={(val) => setEnableButton(val)} />
-      ) : activeFormPage == 2 ? (
-        <IntroductionForm enableButton={(val) => setEnableButton(val)} />
-      ) : activeFormPage == 3 ? (
-        <Experience enableButton={(val) => setEnableButton(val)} />
-      ) : activeFormPage == 4 ? (
-        <EducationForm enableButton={(val) => setEnableButton(val)} />
-      ) : activeFormPage == 5 ? (
-        <SkillForm enableButton={(val) => setEnableButton(val)} />
-      ) : activeFormPage == 6 ? (
-        <Navigate to={`/resume/${resumeId}/view`}/>
-      ) : null}
+      <div className="bg-white rounded-lg shadow-sm p-4 sm:p-6">
+        {activeFormPage == 1 ? (
+          <PersonalDetailsForm enableButton={(val) => setEnableButton(val)} />
+        ) : activeFormPage == 2 ? (
+          <IntroductionForm enableButton={(val) => setEnableButton(val)} />
+        ) : activeFormPage == 3 ? (
+          <Experience enableButton={(val) => setEnableButton(val)} />
+        ) : activeFormPage == 4 ? (
+          <EducationForm enableButton={(val) => setEnableButton(val)} />
+        ) : activeFormPage == 5 ? (
+          <SkillForm enableButton={(val) => setEnableButton(val)} />
+        ) : activeFormPage == 6 ? (
+          <Navigate to={`/resume/${resumeId}/view`} />
+        ) : null}
+      </div>
     </div>
   );
 };
