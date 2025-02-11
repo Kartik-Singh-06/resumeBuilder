@@ -4,7 +4,7 @@ const SkillsDetails = ({ resumeInfo }) => {
   return (
     <div className="my-6">
       <h2
-        className="text-center font-bold text-sm mb-2"
+        className="text-center font-bold text-sm sm:text-base mb-2"
         style={{
           color: resumeInfo?.themeColor,
         }}
@@ -12,19 +12,20 @@ const SkillsDetails = ({ resumeInfo }) => {
         Professional Skills
       </h2>
       <hr
+      className="border-t-2"
         style={{
           borderColor: resumeInfo?.themeColor,
         }}
       />
-      <div className="grid grid-cols-2 mt-1">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
         {resumeInfo?.skills?.map((skill, i) => (
-          <div key={i} className="pt-2 flex gap-2 items-center justify-between">
-            <h2 className=" font-semibold text-xs text-zinc-700">
+          <div key={i} className="flex gap-2 items-center justify-between">
+            <h2 className="font-semibold text-xs sm:text-sm text-zinc-700">
               {skill?.name}
             </h2>
-            <div className="w-[120px] h-2 bg-zinc-200 mr-2">
+            <div className="w-[100px] sm:w-[120px] h-2 bg-zinc-200 rounded-full">
               <div
-                className="h-2"
+                className="h-2 rounded-full"
                 style={{
                   backgroundColor: resumeInfo?.themeColor,
                   width: skill?.rate * 20 + "%",

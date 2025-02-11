@@ -66,23 +66,24 @@ const SkillForm = () => {
 
   return (
     <div>
-      <div className="p-5 shadow-lg rounded-lg border-t-[#007AFF] border-t-4 mt-10">
-        <h2 className="font-bold text-lg">Skill Section</h2>
-        <p className="text-sm">
+      <div className="p-4 sm:p-6 shadow-lg rounded-lg border-t-[#007AFF] border-t-4 mt-6 sm:mt-10">
+        <h2 className="font-bold text-lg sm:text-xl">Skill Section</h2>
+        <p className="text-sm sm:text-base text-gray-600">
           Skills & Proficiency: List key technical and soft skills relevant to
           your field, such as programming languages, frameworks, tools, and
           problem-solving abilities.
         </p>
         <div>
           {skillList.map((item, index) => (
-            <div key={index}>
-              <div className="grid grid-cols-2 gap-10 items-center  border p-3 my-5 rounded-lg">
+            <div key={index} className="mt-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 items-center border p-3 sm:p-4 my-4 rounded-lg">
                 <div>
-                  <label className="mb-2">Name</label>
+                  <label className="text-xs sm:text-sm">Name</label>
                   <Input
                     type="text"
                     defaultValue={item?.name}
                     placeholder="eg: JavaScript"
+                    className="w-full"
                     onChange={(e) =>
                       handleChange(index, "name", e.target.value)
                     }
@@ -99,34 +100,34 @@ const SkillForm = () => {
             </div>
           ))}
 
-          <div className="flex justify-between gap-5">
-            <div className="flex gap-3">
+          <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-5 mt-6">
+            <div className="flex flex-col sm:flex-row gap-3">
               <Button
-                className="bg-transparent text-back border-2 hover:bg-zinc-200"
+                className="bg-transparent text-back border-2 hover:bg-zinc-200 w-full sm:w-auto"
                 onClick={() => addSkills()}
               >
-                <span>
-                  <Plus />
-                </span>
+                <Plus className="h-4 w-4 sm:h-5 sm:w-5" />
+                <span className="ml-2">
                 Add More Skills
+                </span>
               </Button>
               <Button
-                className="bg-transparent text-back border-2 hover:bg-zinc-200"
+                className="bg-transparent text-back border-2 hover:bg-zinc-200 w-full sm:w-auto"
                 onClick={() => removeSkills()}
               >
-                <span>
-                  <Minus />
-                </span>
+                  <Minus className="h-4 w-4 sm:h-5 sm:w-5" />
+                <span className="ml-2">
                 Remove Skills
+                </span>
               </Button>
             </div>
 
             <Button
               disabled={loading}
               onClick={() => handleSubmit()}
-              className="bg-[#007AFF] hover:bg-[#312ECB]"
+              className="bg-[#007AFF] hover:bg-[#312ECB] w-full sm:w-auto"
             >
-              {loading ? <LoaderCircle className="animate-spin" /> : "Save"}
+              {loading ? <LoaderCircle className="animate-spin h-4 w-4 sm:h-5 sm:w-5" /> : "Save"}
             </Button>
           </div>
         </div>

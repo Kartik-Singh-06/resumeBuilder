@@ -97,53 +97,57 @@ const Experience = () => {
   };
 
   return (
-    <div className="p-5 shadow-lg rounded-lg border-t-[#007AFF] border-t-4 mt-10">
-      <h2 className="font-bold text-lg">Experience Section</h2>
-      <p>Share your experience</p>
+    <div className="p-4 sm:p-6 shadow-lg rounded-lg border-t-[#007AFF] border-t-4 mt-6 sm:mt-10">
+      <h2 className="font-bold text-lg sm:text-xl">Experience Section</h2>
+      <p className="text-sm sm:text-base text-gray-600">Share your experience</p>
 
       <div>
         {experienceList?.map((item, index) => (
-          <div key={index}>
-            <div className="grid grid-cols-2 gap-3 border p-3 my-5 rounded-lg">
+          <div key={index} className="mt-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 border p-3 sm:p-4 my-4 rounded-lg">
               <div>
-                <label className="text-xs">Position Title</label>
+                <label className="text-xs sm:text-sm">Position Title</label>
                 <Input
                   name="role"
                   placeholder="eg: Cloud Engg."
                   defaultValue={item?.role}
                   onChange={(e) => handleChange(index, e)}
+                  className="w-full"
                 />
               </div>
               <div>
-                <label className="text-xs">Company Name</label>
+                <label className="text-xs sm:text-sm">Company Name</label>
                 <Input
                   name="company"
                   placeholder="eg: XYZ solutions"
                   defaultValue={item?.company}
                   onChange={(e) => handleChange(index, e)}
+                  className="w-full"
                 />
               </div>
               <div>
-                <label className="text-xs">City</label>
+                <label className="text-xs sm:text-sm">City</label>
                 <Input
                   name="city"
                   placeholder="eg: New York"
                   defaultValue={item?.city}
                   onChange={(e) => handleChange(index, e)}
+                  className="w-full"
                 />
               </div>
               <div>
-                <label className="text-xs">Duration</label>
+                <label className="text-xs sm:text-sm">Duration</label>
                 <Input
                   type="text"
                   placeholder="eg: 2012-present"
                   name="duration"
                   defaultValue={item?.duration}
                   onChange={(e) => handleChange(index, e)}
+                  className="w-full"
                 />
               </div>
             </div>
-            <div className="mb-5 h-[25vh]">
+            <div className="mb-5 h-[150px] sm:h-[200px]">
               <RichTextEditor
                 index={index}
                 defaultValue={item?.workSummery}
@@ -156,34 +160,34 @@ const Experience = () => {
         ))}
       </div>
 
-      <div className="flex justify-between gap-5">
-        <div className="flex gap-3">
+      <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-5 mt-6">
+        <div className="flex flex-col sm:flex-row gap-3">
           <Button
-            className="bg-transparent text-back border-2 hover:bg-zinc-200"
+            className="bg-transparent text-back border-2 hover:bg-zinc-200 w-full sm:w-auto"
             onClick={() => AddNewExperience()}
           >
             <span>
-              <Plus />
+              <Plus className="h-4 w-4 sm:h-5 sm:w-5" />
             </span>
-            Add more experience
+            <span className="ml-2">Add more experience</span>
           </Button>
           <Button
-            className="bg-transparent text-back border-2 hover:bg-zinc-200"
+            className="bg-transparent text-back border-2 hover:bg-zinc-200 w-full sm:w-auto"
             onClick={() => RemoveExperience()}
           >
             <span>
-              <Minus />
+            <Minus className="h-4 w-4 sm:h-5 sm:w-5" />
             </span>{" "}
-            Remove experience
+            <span className="ml-2">Remove experience</span>
           </Button>
         </div>
 
         <Button
           disabled={loading}
           onClick={() => handleSubmit()}
-          className="bg-[#007AFF] hover:bg-[#312ECB]"
+          className="bg-[#007AFF] hover:bg-[#312ECB] w-full sm:w-auto"
         >
-          {loading ? <LoaderCircle className="animate-spin" /> : "Save"}
+          {loading ? <LoaderCircle className="animate-spin  h-4 w-4 sm:h-5 sm:w-5" /> : "Save"}
         </Button>
       </div>
     </div>

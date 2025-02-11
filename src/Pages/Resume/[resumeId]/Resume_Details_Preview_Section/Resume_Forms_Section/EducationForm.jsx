@@ -71,89 +71,92 @@ const EducationForm = () => {
 
   return (
     <div>
-      <div className="p-5 shadow-lg rounded-lg border-t-[#007AFF] border-t-4 mt-10">
-        <h2 className="font-bold text-lg">Education Section</h2>
-        <p className="text-sm">
+      <div className="p-4 sm:p-6 shadow-lg rounded-lg border-t-[#007AFF] border-t-4 mt-6 sm:mt-10">
+        <h2 className="font-bold text-lg sm:text-xl">Education Section</h2>
+        <p className="text-sm sm:text-base text-gray-600">
           Degree & Institution: Mention your degree (e.g., B.Tech in Computer
           Science) and the university/college you attended.
         </p>
 
         <div>
           {educationList?.map((item, index) => (
-            <div key={index}>
-              <div className="grid grid-cols-2 gap-3 border p-3 my-5 rounded-lg">
+            <div key={index} className="mt-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 border p-3 sm:p-4 my-4 rounded-lg">
                 <div>
-                  <label>Course Name</label>
+                  <label className="text-xs sm:text-sm" >Course Name</label>
                   <Input
                     type="text"
                     name="degree"
                     defaultValue={item?.degree}
                     placeholder="eg: Bachelor in Computer Science"
                     onChange={(e) => handleChange(e, index)}
+                    className="w-full"
                   />
                 </div>
                 <div>
-                  <label>Institution Name</label>
+                  <label className="text-xs sm:text-sm">Institution Name</label>
                   <Input
                     type="text"
                     name="institution"
                     defaultValue={item?.institution}
                     placeholder="eg: Boston University"
                     onChange={(e) => handleChange(e, index)}
+                    className="w-full"
                   />
                 </div>
                 <div>
-                  <label>City</label>
+                  <label className="text-xs sm:text-sm">City</label>
                   <Input
                     type="text"
                     name="city"
                     defaultValue={item?.city}
                     placeholder="eg: Boston"
                     onChange={(e) => handleChange(e, index)}
+                    className="w-full"
                   />
                 </div>
                 <div>
-                  <label>Greaduate Year</label>
+                  <label className="text-xs sm:text-sm">Greaduate Year</label>
                   <Input
                     type="text"
                     defaultValue={item?.graduationYear}
                     name="graduationYear"
                     placeholder="eg: 2018"
                     onChange={(e) => handleChange(e, index)}
+                    className="w-full"
                   />
                 </div>
               </div>
             </div>
           ))}
         </div>
-        <div className="flex justify-between gap-5">
-          <div className="flex gap-3">
+        <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-5 mt-6">
+          <div className="flex flex-col sm:flex-row gap-3">
             <Button
-              className="bg-transparent text-back border-2 hover:bg-zinc-200"
+              className="bg-transparent text-back border-2 hover:bg-zinc-200 w-full sm:w-auto"
               onClick={() => addEducationFields()}
             >
-              <span>
-                <Plus />
-              </span>
+                <Plus className="h-4 w-4 sm:h-5 sm:w-5"  />
+              <span className="ml-2">
               Add More Field
+              </span>
             </Button>
             <Button
-              className="bg-transparent text-back border-2 hover:bg-zinc-200"
+              className="bg-transparent text-back border-2 hover:bg-zinc-200 w-full sm:w-auto"
               onClick={() => removeEducationFields()}
             >
-              <span>
-                <Minus />
-              </span>
-              Remove Field
+              
+              <Minus className="h-4 w-4 sm:h-5 sm:w-5" />
+              <span className="ml-2">Remove Field</span>
             </Button>
           </div>
 
           <Button
             disabled={loading}
             onClick={() => handleSubmit()}
-            className="bg-[#007AFF] hover:bg-[#312ECB]"
+            className="bg-[#007AFF] hover:bg-[#312ECB] w-full sm:w-auto"
           >
-            {loading ? <LoaderCircle className="animate-spin" /> : "Save"}
+            {loading ? <LoaderCircle className="animate-spin h-4 w-4 sm:h-5 sm:w-5 " /> : "Save"}
           </Button>
         </div>
       </div>

@@ -52,14 +52,14 @@ const PersonalDetailsForm = ({ enableButton }) => {
   }, []);
 
   return (
-    <div className="p-5 shadow-lg rounded-lg border-t-[#007AFF] border-t-4 mt-10">
-      <h2 className="font-bold text-lg">Personal Details</h2>
-      <p>Get started with the basic personal informations.</p>
+    <div className="p-4 sm:p-6 shadow-lg rounded-lg border-t-[#007AFF] border-t-4 mt-6 sm:mt-10">
+      <h2 className="font-bold text-lg sm:text-xl">Personal Details</h2>
+      <p className="text-sm sm:text-base text-gray-600" >Get started with the basic personal informations.</p>
       <form onSubmit={handleSubmit}>
         <div>
-          <div className="grid grid-cols-2 mt-5 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label>First Name</label>
+              <label className="text-sm sm:text-base">First Name</label>
               <Input
                 type="text"
                 defaultValue={resumeInfo?.firstName}
@@ -67,10 +67,11 @@ const PersonalDetailsForm = ({ enableButton }) => {
                 onChange={handleChange}
                 name="firstName"
                 placeHolder="Eg. John..."
+                className="w-full"
               />
             </div>
             <div>
-              <label>Last Name</label>
+              <label className="text-sm sm:text-base">Last Name</label>
               <Input
                 type="text"
                 defaultValue={resumeInfo?.lastName}
@@ -78,11 +79,12 @@ const PersonalDetailsForm = ({ enableButton }) => {
                 onChange={handleChange}
                 name="lastName"
                 placeHolder="Eg. Deo..."
+                className="w-full"
               />
             </div>
           </div>
           <div>
-            <label>Job Title</label>
+            <label className="text-sm sm:text-base">Job Title</label>
             <Input
               type="text"
               defaultValue={resumeInfo?.jobTitle}
@@ -90,10 +92,11 @@ const PersonalDetailsForm = ({ enableButton }) => {
               onChange={handleChange}
               name="jobTitle"
               placeHolder="Eg. Frontend Developer..."
+              className="w-full"
             />
           </div>
           <div>
-            <label>Address</label>
+            <label className="text-sm sm:text-base">Address</label>
             <Input
               type="text"
               defaultValue={resumeInfo?.address}
@@ -101,10 +104,11 @@ const PersonalDetailsForm = ({ enableButton }) => {
               onChange={handleChange}
               name="address"
               placeHolder="Eg. hiTech city Delhi..."
+              className="w-full"
             />
           </div>
           <div>
-            <label>E-mail</label>
+            <label className="text-sm sm:text-base">E-mail</label>
             <Input
               type="email"
               defaultValue={resumeInfo?.email}
@@ -112,11 +116,12 @@ const PersonalDetailsForm = ({ enableButton }) => {
               onChange={handleChange}
               name="email"
               placeHolder="Eg. john@example.com"
+              className="w-full"
             />
           </div>
-          <div className="grid grid-cols-2 mt-5 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label>Phone Number</label>
+              <label className="text-sm sm:text-base">Phone Number</label>
               <Input
                 type="number"
                 defaultValue={resumeInfo?.phoneNumber}
@@ -124,27 +129,29 @@ const PersonalDetailsForm = ({ enableButton }) => {
                 onChange={handleChange}
                 name="phoneNumber"
                 placeHolder="Eg. (123)-342-2131"
+                className="w-full"
               />
             </div>
             <div>
-              <label>DateOfBirth</label>
+              <label className="text-sm sm:text-base">DateOfBirth</label>
               <Input
                 type="date"
                 defaultValue={resumeInfo?.dateOfBirth}
                 reqired
                 onChange={handleChange}
                 name="dateOfBirth"
+                className="w-full"
               />
             </div>
           </div>
         </div>
-        <div className="mt-4 flex justify-end">
+        <div className="mt-6 flex justify-end">
           <Button
             disabled={loading}
             type="submit"
-            className="bg-[#007AFF] hover:bg-[#312ECB]"
+            className="bg-[#007AFF] hover:bg-[#312ECB] w-full sm:w-auto"
           >
-            {loading ? <LoaderCircle className="animate-spin" /> : "Save"}
+            {loading ? <LoaderCircle className="animate-spin h-4 w-4 sm:h-5 sm:w-5 " /> : "Save"}
           </Button>
         </div>
       </form>

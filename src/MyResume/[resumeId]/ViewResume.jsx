@@ -28,18 +28,18 @@ const ViewResume = () => {
     <ResumeInfoContext.Provider value={{ resumeInfo, setResumeInfo }}>
       <div id="text-area">
         <Header />
-        <div className="m-10 md:mx-20 lg:mx-36">
-          <h2 className="text-center text-2xl font-medium">
+        <div className="m-4 sm:m-6 md:m-10 lg:mx-20 xl:mx-36">
+          <h2 className="text-center text-xl sm:text-2xl font-medium">
             Congrats! Your Resume is generated.👏
           </h2>
-          <p className="text-center text-zinc-300">
+          <p className="text-center text-sm sm:text-base text-zinc-300 mt-2">
             Now you are ready to download and share your resume URL to HR's and
             your friends.
           </p>
-          <div className="flex justify-between px-44 my-8">
+          <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 my-6 sm:my-8">
             <Button
               onClick={download}
-              className="bg-[#007AFF] hover:bg-[#312ECB]"
+              className="bg-[#007AFF] hover:bg-[#312ECB] w-full sm:w-auto"
             >
               Download
             </Button>
@@ -52,7 +52,7 @@ const ViewResume = () => {
               }}
               onClick={() => console.log("shared successfully!")}
             >
-              <Button className="bg-[#007AFF] hover:bg-[#312ECB]">
+              <Button className="bg-[#007AFF] hover:bg-[#312ECB] w-full sm:w-auto">
                 Share 🔗
               </Button>
             </RWebShare>

@@ -81,13 +81,13 @@ const IntroductionForm = ({ enableButton }) => {
   };
 
   return (
-    <div className="p-5 shadow-lg rounded-lg border-t-[#007AFF] border-t-4 mt-10">
-      <h2 className="font-bold text-lg">Introduction Section</h2>
-      <p>Write here about yourself ? </p>
+    <div className="p-4 sm:p-6 shadow-lg rounded-lg border-t-[#007AFF] border-t-4 mt-6 sm:mt-10">
+      <h2 className="font-bold text-lg sm:text-xl">Introduction Section</h2>
+      <p className="text-sm sm:text-base text-gray-600">Write here about yourself ? </p>
 
-      <form onSubmit={handleSubmit} className="mt-7">
-        <div className="flex justify-between items-end">
-          <label className="font-semibold text-zinc-700">
+      <form onSubmit={handleSubmit} className="mt-5">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-3">
+          <label className="font-semibold text-sm sm:text-base text-zinc-700">
             Add Introduction
           </label>
           <Button
@@ -95,31 +95,31 @@ const IntroductionForm = ({ enableButton }) => {
             onClick={() => generateAIIntro()}
             type="button"
             size="sm"
-            className="border-primary text-primary flex gap-2"
+            className="border-primary text-primary flex gap-2 w-full sm:w-auto"
           >
             <Brain className="h-4 w-4" /> Generate from AI
           </Button>
         </div>
         <Textarea
-          className="mt-5 h-[20vh]"
+          className="mt-4 h-[150px] sm:h-[200px]"
           defaultValue={intro}
           required
           onChange={handleInputChange}
         />
         {error && <p className="text-red-500 mt-2">{error}</p>}
-        <div className="mt-4 flex justify-end">
+        <div className="mt-6 flex justify-end">
           <Button
             disabled={loading}
             type="submit"
-            className="bg-[#007AFF] hover:bg-[#312ECB]"
+            className="bg-[#007AFF] hover:bg-[#312ECB] w-full sm:w-auto"
           >
-            {loading ? <LoaderCircle className="animate-spin" /> : "Save"}
+            {loading ? <LoaderCircle className="animate-spin h-4 w-4 sm:h-5 sm:w-5" /> : "Save"}
           </Button>
         </div>
       </form>
       {genrateAItext !== undefined && (
         <div className="mt-10">
-          <h2 className="text-xl font-bold">
+          <h2 className="text-lg sm:text-xl font-bold">
             AI Suggestions for Introduction:
           </h2>
 
@@ -127,10 +127,10 @@ const IntroductionForm = ({ enableButton }) => {
             (genrateAItext?.introduction || genrateAItext?.introductions || genrateAItext?.experience_level).map(
               (item, index) => (
                 <div key={index} className="p-4 border-b">
-                  <h3 className="font-bold text-lg">
+                  <h3 className="font-bold text-base sm:text-lg">
                     Level: {item?.experiencelevel || item?.experience_level || item?.level}
                   </h3>
-                  <p>{item?.introduction || item?.summary}</p>
+                  <p className="text-sm sm:text-base text-gray-700">{item?.introduction || item?.summary}</p>
                 </div>
               )
             )}
